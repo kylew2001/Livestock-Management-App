@@ -20,7 +20,7 @@ namespace AppDev2
                 Console.WriteLine("2. Query farm livestock");
                 Console.WriteLine("3. Insert new farm animal");
                 Console.WriteLine("4. Delete farm animal");
-                Console.WriteLine("5. Print Metrics");
+                Console.WriteLine("5. Print Infos");
                 Console.WriteLine("6. Edit Record");
                 Console.WriteLine("7. Clear Console");
                 Console.WriteLine("8. Exit");
@@ -43,7 +43,7 @@ namespace AppDev2
                             app.ConsoleDeleteAnimalByID();
                             break;
                         case 5:
-                            app.CalculateAndPrintMetrics();
+                            app.CalculateAndPrintInfo();
                             break;
                         case 6:
                             app.EditLivestockRecord();
@@ -146,11 +146,11 @@ namespace AppDev2
             return price;
         }
 
-        public void CalculateAndPrintMetrics()
+        public void CalculateAndPrintInfo()
         {
             if (FarmAnimals.Count == 0)
             {
-                Console.WriteLine("No farm animals to calculate metrics for.");
+                Console.WriteLine("No farm animals to calculate for.");
                 return;
             }
 
@@ -187,7 +187,7 @@ namespace AppDev2
                 totalCostPerDay += cost;
             }
 
-            Console.WriteLine("Metrics Report:");
+            Console.WriteLine("Info Report:");
             Console.WriteLine($"LivestockWeightTax: ${livestockWeightTax:F2}");
             Console.WriteLine($"WaterPrice: ${waterPrice:F2}");
             Console.WriteLine($"CowMilkPrice: ${cowMilkPrice:F2}");
@@ -648,7 +648,7 @@ namespace AppDev2
 
         public void ConsoleQueryByColour()
         {
-            Console.WriteLine("Enter the color of the animals you want to query:");
+            Console.WriteLine("Enter the colour of the animals you want to query:");
 
             string colour = Console.ReadLine();
 
@@ -683,7 +683,7 @@ namespace AppDev2
 
                     cost = animal.Cost + (animal.Water * GetCommodityPrice("Water")) + (animal.Weight * GetCommodityPrice("LivestockWeightTax"));
 
-                    // Calculate tax per day for animals with the specified color
+                    // Calculate tax per day for animals with the specified colour
                     if (animal.Colour.Equals(colour, StringComparison.OrdinalIgnoreCase))
                     {
                         taxPerDay += animal.Weight * GetCommodityPrice("LivestockWeightTax");
@@ -732,7 +732,7 @@ namespace AppDev2
             }
             else
             {
-                Console.WriteLine($"No animals found with color '{colour}'.");
+                Console.WriteLine($"No animals found with colour '{colour}'.");
             }
         }
 
