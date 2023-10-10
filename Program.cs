@@ -1137,7 +1137,7 @@ namespace AppDev2
         internal static OdbcConnection GetConn()
         {
             string? dbstr = ConfigurationManager.AppSettings.Get("odbcString");
-            string fpath = @"C:\Users\kswal\Downloads\FarmData.accdb"; 
+            string fpath = @"TempFiles\FarmData.accdb"; 
             string connstr = dbstr + fpath;
             var conn = new OdbcConnection(connstr);
             conn.Open();
