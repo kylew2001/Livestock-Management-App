@@ -163,6 +163,7 @@ namespace AppDev2
             double totalIncomePerDay = 0.0;
             double totalCostPerDay = 0.0;
             double totalGovtTaxPerDay = 0.0; // Initialize the government tax
+            double totalGovtTaxFor30Days = 0.0; // Initialize the government tax for 30 days
 
             foreach (var animal in FarmAnimals)
             {
@@ -185,14 +186,16 @@ namespace AppDev2
 
                 cost = animal.Cost + (animal.Water * waterPrice) + (animal.Weight * livestockWeightTax);
 
-                // Calculate government tax based on the weight of the animal
-                govtTax = animal.Weight * GetCommodityPrice("GovernmentTaxRate");
+                // Calculate government tax based on the weight of the animal and the government tax rate
+                govtTax = animal.Weight * livestockWeightTax;
 
                 totalIncomePerDay += income;
                 totalCostPerDay += cost;
                 totalGovtTaxPerDay += govtTax; 
-
             }
+
+            // Calculate government tax for 30 days
+            totalGovtTaxFor30Days = totalGovtTaxPerDay * 30;
 
             Console.WriteLine("Info Report:");
             Console.WriteLine($"LivestockWeightTax: ${livestockWeightTax:F2}");
@@ -202,7 +205,7 @@ namespace AppDev2
             Console.WriteLine($"SheepWoolPrice: ${sheepWoolPrice:F2}");
             Console.WriteLine($"Total Income Per Day: ${totalIncomePerDay:F2}");
             Console.WriteLine($"Total Cost Per Day: ${totalCostPerDay:F2}");
-            Console.WriteLine($"Total Government Tax Per Day: ${totalGovtTaxPerDay:F2}"); 
+            Console.WriteLine($"Total Government Tax For 30 Days: ${totalGovtTaxFor30Days:F2}"); 
 
             double profitOrLoss = totalIncomePerDay - totalCostPerDay;
 
@@ -222,6 +225,7 @@ namespace AppDev2
             double averageWeight = FarmAnimals.Average(animal => animal.Weight);
             Console.WriteLine($"Average Weight of all livestock: {averageWeight:F2} KG");
         }
+
 
 
         public void PrintConsole()
