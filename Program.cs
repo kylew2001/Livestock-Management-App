@@ -162,11 +162,13 @@ namespace AppDev2
 
             double totalIncomePerDay = 0.0;
             double totalCostPerDay = 0.0;
+            double totalGovtTaxPerDay = 0.0; // Initialize the government tax
 
             foreach (var animal in FarmAnimals)
             {
                 double income = 0.0;
                 double cost = 0.0;
+                double govtTax = 0.0; // Initialize the government tax for each animal
 
                 if (animal is Cow cow)
                 {
@@ -183,8 +185,13 @@ namespace AppDev2
 
                 cost = animal.Cost + (animal.Water * waterPrice) + (animal.Weight * livestockWeightTax);
 
+                // Calculate government tax based on the weight of the animal
+                govtTax = animal.Weight * GetCommodityPrice("GovernmentTaxRate");
+
                 totalIncomePerDay += income;
                 totalCostPerDay += cost;
+                totalGovtTaxPerDay += govtTax; 
+
             }
 
             Console.WriteLine("Info Report:");
@@ -195,6 +202,7 @@ namespace AppDev2
             Console.WriteLine($"SheepWoolPrice: ${sheepWoolPrice:F2}");
             Console.WriteLine($"Total Income Per Day: ${totalIncomePerDay:F2}");
             Console.WriteLine($"Total Cost Per Day: ${totalCostPerDay:F2}");
+            Console.WriteLine($"Total Government Tax Per Day: ${totalGovtTaxPerDay:F2}"); 
 
             double profitOrLoss = totalIncomePerDay - totalCostPerDay;
 
@@ -214,6 +222,7 @@ namespace AppDev2
             double averageWeight = FarmAnimals.Average(animal => animal.Weight);
             Console.WriteLine($"Average Weight of all livestock: {averageWeight:F2} KG");
         }
+
 
         public void PrintConsole()
         {
